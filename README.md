@@ -29,3 +29,9 @@ docker-compose up -d
 ```
 yarn start:dev
 ```
+
+7. Para llenar la base de datos con productos de prueba, hacer una petición GET a la ruta /seed
+
+```
+http://localhost:3000/seed
+```
