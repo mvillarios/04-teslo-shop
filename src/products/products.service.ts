@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { validate as isUuid } from 'uuid';
+import { User } from '../auth/entities/user.entity';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { IErrorsTypeORM } from '../common/interfaces/errors-type-orm.interface';
 import { ErrorHandleService } from '../common/services/error-handle.service';
@@ -22,7 +23,7 @@ export class ProductsService {
     private readonly errorHandler: ErrorHandleService,
   ) {}
 
-  async create(createProductDto: CreateProductDto) {
+  async create(createProductDto: CreateProductDto, user: User) {
     try {
       const { images = [], ...productDetails } = createProductDto;
 
@@ -31,6 +32,7 @@ export class ProductsService {
         images: images.map((image) =>
           this.productImageRepository.create({ url: image }),
         ),
+        user,
       });
 
       await this.productsRepository.save(product);
@@ -86,7 +88,7 @@ export class ProductsService {
     };
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto, user: User) {
     const { images, ...toUpdate } = updateProductDto;
 
     const product = await this.productsRepository.preload({
@@ -109,6 +111,8 @@ export class ProductsService {
           this.productImageRepository.create({ url: image }),
         );
       }
+
+      product.user = user;
       await queryRunner.manager.save(product);
       await queryRunner.commitTransaction();
 

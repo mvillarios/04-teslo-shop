@@ -1,3 +1,4 @@
+import * as brcypt from 'bcrypt';
 export interface SeedProduct {
   description: string;
   images: string[];
@@ -14,11 +15,33 @@ export interface SeedProduct {
 type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
 
+interface SeedUser {
+  email: string;
+  password: string;
+  fullName: string;
+  roles: string[];
+}
+
 interface SeedData {
+  users: SeedUser[];
   products: SeedProduct[];
 }
 
 export const initialData: SeedData = {
+  users: [
+    {
+      email: 'user1@example.com',
+      password: brcypt.hashSync('Password1', 10),
+      fullName: 'User One',
+      roles: ['admin'],
+    },
+    {
+      email: 'user2@example.com',
+      password: brcypt.hashSync('Password2', 10),
+      fullName: 'User Two',
+      roles: ['user'],
+    },
+  ],
   products: [
     {
       description:
