@@ -1,9 +1,11 @@
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, GetUser } from '../auth/decorators';
 import { User } from '../auth/entities/user.entity';
 import { ValidRoles } from '../auth/interfaces';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './entities';
 import { ProductsService } from './products.service';
 import {
   Body,
@@ -21,14 +23,31 @@ import {
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @ApiResponse({
+    status: 201,
+    description: 'The product has been successfully created.',
+    type: Product,
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden.',
+  })
   @Post()
   @Auth(ValidRoles.admin)
   create(@Body() createProductDto: CreateProductDto, @GetUser() user: User) {
     return this.productsService.create(createProductDto, user);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'List of products',
+    type: [Product],
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized.',
+  })
   @Get()
-  @Auth()
   findAll(@Query() paginationDto: PaginationDto) {
     return this.productsService.findAll(paginationDto);
   }

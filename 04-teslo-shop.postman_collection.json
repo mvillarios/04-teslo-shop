@@ -1,0 +1,311 @@
+{
+  "info": {
+    "_postman_id": "316a1fae-5b61-4ed5-a64b-88cc9d04220f",
+    "name": "04-teslo-shop",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30125725",
+    "_collection_link": "https://go.postman.co/collection/30125725-316a1fae-5b61-4ed5-a64b-88cc9d04220f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Crear Producto",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Miguel Shirt\",\r\n    \"sizes\": [\"SM\", \"M\", \"L\"],\r\n    \"gender\": \"men\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/products",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Products",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Miguel Shirt\",\r\n    \"sizes\": [\"SM\", \"M\", \"L\"],\r\n    \"gender\": \"men\",\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/products",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/products/311538e9-44d7-49d9-8322-06485bd27f22",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                "311538e9-44d7-49d9-8322-06485bd27f22"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update By Id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/products/632b4c70-93ba-438c-90c5-f22e9ef70025",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                "632b4c70-93ba-438c-90c5-f22e9ef70025"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/products/632b4c70-93ba-438c-90c5-f22e9ef70025",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                "632b4c70-93ba-438c-90c5-f22e9ef70025"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "item": [
+        {
+          "name": "Post Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "b9a4b960-108d-4023-be05-686954d7d4c4",
+                  "src": "/C:/Users/mvill/Desktop/GDqd5hVXQAAfPzn.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/files/product",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "files",
+                "product"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Crear Usuario",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"correo@correo.com\",\r\n    \"password\": \"Password1\",\r\n    \"fullName\": \"Miguel Villa\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Usuario",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var responseBody = pm.response.json();\r",
+                  "pm.environment.set(\"access_token\", responseBody.token);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user1@example.com\",\r\n    \"password\": \"Password1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check Auth Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/check-status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "check-status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Run Seed",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \r\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/seed",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "seed"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

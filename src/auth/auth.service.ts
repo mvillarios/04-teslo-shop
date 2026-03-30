@@ -35,28 +35,24 @@ export class AuthService {
   }
 
   async login(loginUserDto: LoginUserDto) {
-    try {
-      const { email, password } = loginUserDto;
-      const user = await this.userRepository.findOne({
-        where: { email },
-        select: { email: true, password: true, id: true },
-      });
+    const { email, password } = loginUserDto;
+    const user = await this.userRepository.findOne({
+      where: { email },
+      select: { email: true, password: true, id: true },
+    });
 
-      if (!user) {
-        throw new UnauthorizedException('Invalid credentials');
-      }
-
-      if (!brcypt.compareSync(password, user.password)) {
-        throw new UnauthorizedException('Invalid credentials');
-      }
-
-      return {
-        ...user,
-        token: this.getToken({ id: user.id }),
-      };
-    } catch (error) {
-      this.errorHandler.errorHandle(error as IErrorsTypeORM);
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
     }
+
+    if (!brcypt.compareSync(password, user.password)) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    return {
+      ...user,
+      token: this.getToken({ id: user.id }),
+    };
   }
 
   checkAuthStatus(user: User) {
